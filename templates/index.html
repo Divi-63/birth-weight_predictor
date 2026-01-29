@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birth Weight Predictor</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset some default styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(to right, #74ebd5, #acb6e5);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background: #ffffffcc;
+            padding: 40px 50px;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            text-align: center;
+            width: 100%;
+            max-width: 450px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        h1 {
+            margin-bottom: 25px;
+            color: #333;
+            font-weight: 700;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        label {
+            text-align: left;
+            font-weight: 500;
+            color: #555;
+        }
+
+        input {
+            padding: 10px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        input:focus {
+            border-color: #6a82fb;
+            box-shadow: 0 0 5px #6a82fb;
+            outline: none;
+        }
+
+        button {
+            padding: 12px 20px;
+            background: linear-gradient(to right, #6a82fb, #fc5c7d);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        @keyframes fadeIn {
+            from {opacity: 0; transform: translateY(-20px);}
+            to {opacity: 1; transform: translateY(0);}
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Predict Birth Weight</h1>
+        <form action="/predict" method="POST">
+            <div>
+                <label for="gestation">Gestation</label>
+                <input name="gestation" id="gestation" type="number" placeholder="Weeks of gestation" required>
+            </div>
+
+            <div>
+                <label for="parity">Parity</label>
+                <input name="parity" id="parity" type="number" placeholder="No. of prev. births: 1 or 0" required>
+            </div>
+
+            <div>
+                <label for="age">Age</label>
+                <input name="age" id="age" type="number" placeholder="Mother's age" required>
+            </div>
+
+            <div>
+                <label for="height">Height</label>
+                <input name="height" id="height" type="number" placeholder="Height in cm" required>
+            </div>
+
+            <div>
+                <label for="weight">Weight</label>
+                <input name="weight" id="weight" type="number" placeholder="Weight in pounds" required>
+            </div>
+
+            <div>
+                <label for="smoke">Smoke</label>
+                <input name="smoke" id="smoke" type="number" placeholder="1 = Yes, 0 = No" required>
+            </div>
+
+            <button type="submit">Predict Birth Weight</button>
+
+            <!-- Add this just below the submit button inside the container div -->
+<p style="margin-top: 20px; font-weight: 600; font-size: 18px; color: #333;">
+    Predicted Birth Weight: {{prediction}}
+</p>
+
+
+        </form>
+    </div>
+
+    <script>
+        // Simple JS enhancement: alert user if fields are empty on submit
+        const form = document.querySelector('form');
+        form.addEventListener('submit', (e) => {
+            const inputs = form.querySelectorAll('input');
+            let empty = false;
+            inputs.forEach(input => {
+                if (!input.value) empty = true;
+            });
+            if (empty) {
+                e.preventDefault();
+                alert("Please fill in all fields before submitting!");
+            }
+        });
+    </script>
+
+</body>
+</html>
