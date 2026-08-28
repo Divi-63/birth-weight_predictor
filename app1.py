@@ -25,6 +25,9 @@ def get_cleaned_data(form_data):
 @app.route('/',methods=['GET'])
 def home():
      return render_template("index.html")
+
+
+
 #Define your Endpoint : 
 @app.route("/predict",methods = ['POST'])
 def get_prediction():
