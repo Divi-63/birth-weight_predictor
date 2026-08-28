@@ -1,7 +1,33 @@
-myvenv
-dataset
-model_training.ipynb
+# Virtual environments
+myvenv/
+.venv/
+venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Pytest cache
+.pytest_cache/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Environment / secrets
+.env
+.env.*
+
+# VS Code
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Dataset
+dataset/
+
+# Old / unused Flask files
 app.py
 app2.py
-test_app2.py
 app3.py
