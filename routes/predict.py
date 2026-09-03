@@ -2,10 +2,9 @@ import os
 import pandas as pd
 import pickle
 from flask import Blueprint, request
-from extensions import cache
 
 
-path = os.path.join(os.path.dirname(__file__), "model.pkl")
+path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "model.pkl")
 with open (path,'rb') as obj :
  model = pickle.load(obj)
 
@@ -37,7 +36,7 @@ def get_cleaned_data(form_data):
 
 
 
-EXCPECTED_COLUMNS = ["gestation","parity","age","height","weight","smoke"]
+EXPECTED_COLUMNS = ["gestation","parity","age","height","weight","smoke"]
 
 
 
@@ -45,7 +44,6 @@ EXCPECTED_COLUMNS = ["gestation","parity","age","height","weight","smoke"]
 
 # define your endpoint
 @predict_bp.route("/predict", methods = ['POST'])
-@cache.cached(timeout=30, query_string = True)
 def get_prediction():
     # get data from user
     # baby_data_form = request.form
@@ -56,7 +54,7 @@ def get_prediction():
 
     # convert into dataframe
     baby_df = pd.DataFrame(baby_data_form)
-    baby_df = baby_df[EXCPECTED_COLUMNS]
+    baby_df = baby_df[EXPECTED_COLUMNS]
 
     # load machine leanring trained model
     # path = os.path.join(os.path.dirname(__file__), "model.pkl")

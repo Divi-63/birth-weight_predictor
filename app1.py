@@ -2,7 +2,10 @@ import os
 from flask import Flask,request,jsonify, render_template
 import pandas as pd 
 import pickle
+from routes.predict import predict_bp
+
 app = Flask(__name__)
+app.register_blueprint(predict_bp, url_prefix="/api")
 
 def get_cleaned_data(form_data):
      gestation = float(form_data['gestation'])
